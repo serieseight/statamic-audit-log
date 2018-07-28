@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono:400,500');
+
+#audit-log pre {
+  white-space: pre-wrap;
+}
+
+#audit-log .events-list .dossier {
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+#audit-log .events-list .dossier tbody tr:nth-child(even) {
+  background: #f6f6f6;
+}
+
+#audit-log .events-list .dossier tbody tr:hover {
+  background: #f1f5f9;
+}
+
+#audit-log .events-list .dossier tbody td {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 13px;
+}
+
+#audit-log .events-list .dossier th:last-child,
+#audit-log .events-list .dossier td:last-child {
+  padding-right: 16px;
+}
+
+#audit-log .events-list .dossier tbody td a {
+  font-size: inherit;
+  font-weight: 500;
+}

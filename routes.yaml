@@ -1,0 +1,7 @@
+routes:
+  get@/:
+    as: auditlog.index
+    uses: index
+  get@/{id}/show:
+    as: auditlog.show
+    uses: show
