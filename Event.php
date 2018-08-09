@@ -20,7 +20,7 @@ class Event extends Model
     public static function record($event, $eventName = null)
     {
         self::create([
-            'user_id' => auth()->user()->id(),
+            'user_id' => self::getUserId(),
             'data_id' => self::getId($event),
             'event' => $eventName ?: self::getEvent($event),
             'meta' => self::getMeta($event),
@@ -46,6 +46,11 @@ class Event extends Model
         return YAML::dump($this->$key);
 
         return property_exists($this, $key) ? YAML::dump($this->$key) : null;
+    }
+
+    protected static function getUserId()
+    {
+        return ($user = auth()->user()) ? $user->id() : null;
     }
 
     protected static function getId($event)
