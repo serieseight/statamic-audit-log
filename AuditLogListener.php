@@ -5,6 +5,7 @@ namespace Statamic\Addons\AuditLog;
 use Statamic\API\Nav;
 use Statamic\API\Str;
 use Statamic\Extend\Listener;
+use Illuminate\Support\Facades\Event as CoreEvent;
 
 use Statamic\Events\Data\AddonSettingsSaved;
 use Statamic\Events\Data\AssetContainerDeleted;
@@ -86,7 +87,16 @@ class AuditLogListener extends Listener
         UserSaved::class => 'record',
 
         // Record 3rd-Party Addon Events
+        // Laravel Events
+        'auth.login' => 'record',
+        'auth.logout' => 'record',
+
         'auditlog.record' => 'record',
+    ];
+
+    protected $aliases = [
+        'auth.login' => 'UserLogin',
+        'auth.logout' => 'UserLogout',
     ];
 
     public function addToHead()
@@ -103,6 +113,8 @@ class AuditLogListener extends Listener
 
     public function record($event)
     {
-        Event::record($event);
+        $name = array_get($this->aliases, CoreEvent::firing());
+
+        Event::record($event, $name);
     }
 }

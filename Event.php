@@ -17,12 +17,12 @@ class Event extends Model
         'snapshot' => 'array',
     ];
 
-    public static function record($event)
+    public static function record($event, $eventName = null)
     {
         self::create([
             'user_id' => auth()->user()->id(),
             'data_id' => self::getId($event),
-            'event' => self::getEvent($event),
+            'event' => $eventName ?: self::getEvent($event),
             'meta' => self::getMeta($event),
             'snapshot' => self::getSnapshot($event),
         ]);
@@ -75,6 +75,10 @@ class Event extends Model
     {
         if (method_exists($event, 'contextualData')) {
             return $event->contextualData();
+        }
+
+        if (method_exists($event, 'data')) {
+            return $event->data();
         }
 
         return null;
