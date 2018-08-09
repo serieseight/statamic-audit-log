@@ -6,7 +6,7 @@ This addon logs CP content events that are fired by Statamic into a database as 
 
 Audit Log supports the following events:
 
-*Statamic Data Events*
+**Statamic Data Events**
 ```
 AddonSettingsSaved
 AssetContainerDeleted
@@ -45,7 +45,7 @@ UserGroupSaved
 UserSaved
 ```
 
-*Laravel Events*
+**Laravel Events**
 ```
 auth.login
 auth.logout
