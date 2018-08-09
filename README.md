@@ -4,7 +4,7 @@
 
 This addon logs CP content events that are fired by Statamic into a database as an audit trail.
 
-Audit Log supports the following events:
+### Audit Log supports the following events:
 
 **Statamic Data Events**
 ```
