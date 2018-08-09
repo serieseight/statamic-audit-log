@@ -49,7 +49,7 @@ class AuditLogListener extends Listener
         'cp.add_to_head' => 'addToHead',
         'cp.nav.created' => 'addNavItem',
 
-        // Record Statamic Data Events
+        // Statamic Data Events
         AddonSettingsSaved::class => 'record',
         AssetContainerDeleted::class => 'record',
         AssetContainerSaved::class => 'record',
@@ -86,11 +86,11 @@ class AuditLogListener extends Listener
         UserGroupSaved::class => 'record',
         UserSaved::class => 'record',
 
-        // Record 3rd-Party Addon Events
         // Laravel Events
         'auth.login' => 'record',
         'auth.logout' => 'record',
 
+        // 3rd-Party Addon Events
         'auditlog.record' => 'record',
     ];
 
