@@ -56,9 +56,7 @@
       <strong>Snapshot:</strong>
     </p>
 
-    <pre>
-      {{ $event->getYaml('snapshot') }}
-    </pre>
+    <pre>{{ $event->getYaml('snapshot') }}</pre>
   </div>
 </div>
 
