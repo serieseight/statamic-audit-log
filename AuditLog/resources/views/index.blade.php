@@ -25,7 +25,7 @@
           @foreach($events as $event)
           <tr>
             <td style="max-width: 325px;">
-              <a href="{{ $audit_log_action_path }}/{{ $event->id }}/show">
+              <a href="{{ route('auditlog.show', $event) }}">
                 {{ $event->getTitle() }}
               </a>
             </td>
@@ -40,7 +40,7 @@
               ({{ $event->created_at->tzName }})
             </td>
             <td class="text-right">
-              <a class="btn btn-small" href="{{ $audit_log_action_path }}/{{ $event->id }}/show">
+              <a class="btn btn-small" href="{{ route('auditlog.show', $event) }}">
                 View
               </a>
             </td>

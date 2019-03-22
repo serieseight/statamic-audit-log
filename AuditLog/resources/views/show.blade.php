@@ -8,7 +8,7 @@
       Audit Log
     </h1>
 
-    <a class="btn" href="{{ $audit_log_action_path }}">
+    <a class="btn" href="{{ route('auditlog.index') }}">
       Back
     </a>
   </div>
