@@ -2,9 +2,15 @@
 
 namespace Statamic\Addons\AuditLog;
 
+use Statamic\API\Config;
 use Statamic\API\User;
 use Statamic\API\YAML;
 use Illuminate\Database\Eloquent\Model;
+use Statamic\Events\Data\PageSaved;
+use Statamic\Events\Data\TermSaved;
+use Statamic\Events\Data\EntrySaved;
+use Statamic\Events\Data\GlobalsSaved;
+use Statamic\Events\Data\TaxonomySaved;
 
 class Event extends Model
 {
@@ -22,6 +28,7 @@ class Event extends Model
         self::create([
             'user_id' => self::getUserId(),
             'data_id' => self::getId($event),
+            'locale' => self::getLocale($event),
             'event' => $eventName ?: self::getEvent($event),
             'meta' => self::getMeta($event),
             'snapshot' => self::getSnapshot($event),
@@ -31,6 +38,15 @@ class Event extends Model
     public function getUserAttribute()
     {
         return User::find($this->user_id) ?: null;
+    }
+
+    public function getLocaleAttribute()
+    {
+         if ($this->getAttributes()['locale'] == null) {
+             return;
+         }
+
+         return Config::all()['system']['locales'][$this->getAttributes()['locale']]['name'];
     }
 
     public function getTitle()
@@ -58,6 +74,15 @@ class Event extends Model
         return array_get(self::getSnapshot($event), 'id');
     }
 
+    protected static function getLocale($event)
+    {
+        if ($event instanceof PageSaved || $event instanceof TaxonomySaved || $event instanceof TermSaved || $event instanceof EntrySaved || $event instanceof GlobalsSaved) {
+            return request()->get('locale');
+        }
+
+        return null;
+    }
+
     protected static function getEvent($event)
     {
         return get_class($event);
@@ -78,6 +103,11 @@ class Event extends Model
 
     protected static function getSnapshot($event)
     {
+
+        if (isset($event->data) && method_exists($event->data, 'in')) {
+            return $event->data->in(request()->get('locale'))->toArray();
+        }
+
         if (method_exists($event, 'contextualData')) {
             return $event->contextualData();
         }

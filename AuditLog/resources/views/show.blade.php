@@ -20,6 +20,11 @@
     </p>
 
     <p>
+      <strong>Locale:</strong>
+      {{ $event->locale }}
+    </p>
+
+    <p>
       <strong>Event:</strong>
       {{ $event->event }}
     </p>

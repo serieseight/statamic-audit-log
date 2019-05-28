@@ -15,6 +15,7 @@
         <thead>
           <tr>
             <th>Title</th>
+            <th>Locale</th>
             <th>Event</th>
             <th>User</th>
             <th>Date</th>
@@ -28,6 +29,9 @@
               <a href="{{ route('auditlog.show', $event) }}">
                 {{ $event->getTitle() }}
               </a>
+            </td>
+            <td>
+              {{ $event->locale }}
             </td>
             <td>
               {{ $event->event }}
