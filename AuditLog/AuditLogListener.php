@@ -2,46 +2,10 @@
 
 namespace Statamic\Addons\AuditLog;
 
-use Statamic\API\Nav;
 use Statamic\API\Str;
+use Statamic\API\Nav;
 use Statamic\Extend\Listener;
 use Illuminate\Support\Facades\Event as CoreEvent;
-
-use Statamic\Events\Data\AddonSettingsSaved;
-use Statamic\Events\Data\AssetContainerDeleted;
-use Statamic\Events\Data\AssetContainerSaved;
-use Statamic\Events\Data\AssetDeleted;
-use Statamic\Events\Data\AssetFolderDeleted;
-use Statamic\Events\Data\AssetFolderSaved;
-use Statamic\Events\Data\AssetMoved;
-use Statamic\Events\Data\AssetReplaced;
-use Statamic\Events\Data\AssetUploaded;
-use Statamic\Events\Data\CollectionDeleted;
-use Statamic\Events\Data\CollectionSaved;
-use Statamic\Events\Data\EntryDeleted;
-use Statamic\Events\Data\EntrySaved;
-use Statamic\Events\Data\FieldsetDeleted;
-use Statamic\Events\Data\FieldsetSaved;
-use Statamic\Events\Data\FileUploaded;
-use Statamic\Events\Data\GlobalsDeleted;
-use Statamic\Events\Data\GlobalsSaved;
-use Statamic\Events\Data\PageDeleted;
-use Statamic\Events\Data\PageMoved;
-use Statamic\Events\Data\PageSaved;
-use Statamic\Events\Data\PagesMoved;
-use Statamic\Events\Data\RoleDeleted;
-use Statamic\Events\Data\RoleSaved;
-use Statamic\Events\Data\SettingsSaved;
-use Statamic\Events\Data\SubmissionDeleted;
-use Statamic\Events\Data\SubmissionSaved;
-use Statamic\Events\Data\TaxonomyDeleted;
-use Statamic\Events\Data\TaxonomySaved;
-use Statamic\Events\Data\TermDeleted;
-use Statamic\Events\Data\TermSaved;
-use Statamic\Events\Data\UserDeleted;
-use Statamic\Events\Data\UserGroupDeleted;
-use Statamic\Events\Data\UserGroupSaved;
-use Statamic\Events\Data\UserSaved;
 
 class AuditLogListener extends Listener
 {
@@ -50,41 +14,41 @@ class AuditLogListener extends Listener
         'cp.nav.created' => 'addNavItem',
 
         // Statamic Data Events
-        AddonSettingsSaved::class => 'record',
-        AssetContainerDeleted::class => 'record',
-        AssetContainerSaved::class => 'record',
-        AssetDeleted::class => 'record',
-        AssetFolderDeleted::class => 'record',
-        AssetFolderSaved::class => 'record',
-        AssetMoved::class => 'record',
-        AssetReplaced::class => 'record',
-        AssetUploaded::class => 'record',
-        CollectionDeleted::class => 'record',
-        CollectionSaved::class => 'record',
-        EntryDeleted::class => 'record',
-        EntrySaved::class => 'record',
-        FieldsetDeleted::class => 'record',
-        FieldsetSaved::class => 'record',
-        FileUploaded::class => 'record',
-        GlobalsDeleted::class => 'record',
-        GlobalsSaved::class => 'record',
-        PageDeleted::class => 'record',
-        PageMoved::class => 'record',
-        PageSaved::class => 'record',
-        PagesMoved::class => 'record',
-        RoleDeleted::class => 'record',
-        RoleSaved::class => 'record',
-        SettingsSaved::class => 'record',
-        SubmissionDeleted::class => 'record',
-        SubmissionSaved::class => 'record',
-        TaxonomyDeleted::class => 'record',
-        TaxonomySaved::class => 'record',
-        TermDeleted::class => 'record',
-        TermSaved::class => 'record',
-        UserDeleted::class => 'record',
-        UserGroupDeleted::class => 'record',
-        UserGroupSaved::class => 'record',
-        UserSaved::class => 'record',
+        \Statamic\Events\Data\AddonSettingsSaved::class => 'record',
+        \Statamic\Events\Data\AssetContainerDeleted::class => 'record',
+        \Statamic\Events\Data\AssetContainerSaved::class => 'record',
+        \Statamic\Events\Data\AssetDeleted::class => 'record',
+        \Statamic\Events\Data\AssetFolderDeleted::class => 'record',
+        \Statamic\Events\Data\AssetFolderSaved::class => 'record',
+        \Statamic\Events\Data\AssetMoved::class => 'record',
+        \Statamic\Events\Data\AssetReplaced::class => 'record',
+        \Statamic\Events\Data\AssetUploaded::class => 'record',
+        \Statamic\Events\Data\CollectionDeleted::class => 'record',
+        \Statamic\Events\Data\CollectionSaved::class => 'record',
+        \Statamic\Events\Data\EntryDeleted::class => 'record',
+        \Statamic\Events\Data\EntrySaved::class => 'record',
+        \Statamic\Events\Data\FieldsetDeleted::class => 'record',
+        \Statamic\Events\Data\FieldsetSaved::class => 'record',
+        \Statamic\Events\Data\FileUploaded::class => 'record',
+        \Statamic\Events\Data\GlobalsDeleted::class => 'record',
+        \Statamic\Events\Data\GlobalsSaved::class => 'record',
+        \Statamic\Events\Data\PageDeleted::class => 'record',
+        \Statamic\Events\Data\PageMoved::class => 'record',
+        \Statamic\Events\Data\PageSaved::class => 'record',
+        \Statamic\Events\Data\PagesMoved::class => 'record',
+        \Statamic\Events\Data\RoleDeleted::class => 'record',
+        \Statamic\Events\Data\RoleSaved::class => 'record',
+        \Statamic\Events\Data\SettingsSaved::class => 'record',
+        \Statamic\Events\Data\SubmissionDeleted::class => 'record',
+        \Statamic\Events\Data\SubmissionSaved::class => 'record',
+        \Statamic\Events\Data\TaxonomyDeleted::class => 'record',
+        \Statamic\Events\Data\TaxonomySaved::class => 'record',
+        \Statamic\Events\Data\TermDeleted::class => 'record',
+        \Statamic\Events\Data\TermSaved::class => 'record',
+        \Statamic\Events\Data\UserDeleted::class => 'record',
+        \Statamic\Events\Data\UserGroupDeleted::class => 'record',
+        \Statamic\Events\Data\UserGroupSaved::class => 'record',
+        \Statamic\Events\Data\UserSaved::class => 'record',
 
         // Laravel Events
         'auth.login' => 'record',
