@@ -76,7 +76,7 @@ class Event extends Model
 
     protected static function getLocale($event)
     {
-        return $this->hasLocale($event) ? request()->get('locale') : null;
+        return self::hasLocale($event) ? request()->get('locale') : null;
     }
 
     protected static function hasLocale($event)
