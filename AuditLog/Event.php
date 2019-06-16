@@ -2,14 +2,14 @@
 
 namespace Statamic\Addons\AuditLog;
 
-use Statamic\API\Config;
 use Statamic\API\User;
 use Statamic\API\YAML;
-use Illuminate\Database\Eloquent\Model;
+use Statamic\API\Config;
 use Statamic\Events\Data\PageSaved;
 use Statamic\Events\Data\TermSaved;
 use Statamic\Events\Data\EntrySaved;
 use Statamic\Events\Data\GlobalsSaved;
+use Illuminate\Database\Eloquent\Model;
 use Statamic\Events\Data\TaxonomySaved;
 
 class Event extends Model
@@ -42,11 +42,11 @@ class Event extends Model
 
     public function getLocaleAttribute()
     {
-         if ($this->getAttributes()['locale'] == null) {
-             return;
-         }
+        if (! $locale = array_get($this->getAttributes(), 'locale')) {
+            return;
+        }
 
-         return Config::all()['system']['locales'][$this->getAttributes()['locale']]['name'];
+        return Config::getLocaleName($locale);
     }
 
     public function getTitle()
@@ -76,11 +76,16 @@ class Event extends Model
 
     protected static function getLocale($event)
     {
-        if ($event instanceof PageSaved || $event instanceof TaxonomySaved || $event instanceof TermSaved || $event instanceof EntrySaved || $event instanceof GlobalsSaved) {
-            return request()->get('locale');
-        }
+        return $this->hasLocale($event) ? request()->get('locale') : null;
+    }
 
-        return null;
+    protected static function hasLocale($event)
+    {
+        return $event instanceof PageSaved
+            || $event instanceof TermSaved
+            || $event instanceof EntrySaved
+            || $event instanceof GlobalsSaved
+            || $event instanceof TaxonomySaved;
     }
 
     protected static function getEvent($event)
@@ -103,7 +108,6 @@ class Event extends Model
 
     protected static function getSnapshot($event)
     {
-
         if (isset($event->data) && method_exists($event->data, 'in')) {
             return $event->data->in(request()->get('locale'))->toArray();
         }

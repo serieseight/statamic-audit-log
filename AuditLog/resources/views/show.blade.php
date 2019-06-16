@@ -21,7 +21,7 @@
 
     <p>
       <strong>Locale:</strong>
-      {{ $event->locale }}
+      {{ $event->locale ?: '-' }}
     </p>
 
     <p>
