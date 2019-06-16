@@ -5,12 +5,9 @@ namespace Statamic\Addons\AuditLog;
 use Statamic\API\User;
 use Statamic\API\YAML;
 use Statamic\API\Config;
-use Statamic\Events\Data\PageSaved;
-use Statamic\Events\Data\TermSaved;
-use Statamic\Events\Data\EntrySaved;
-use Statamic\Events\Data\GlobalsSaved;
-use Illuminate\Database\Eloquent\Model;
+use Statamic\Events\Data\ContentSaved;
 use Statamic\Events\Data\TaxonomySaved;
+use Illuminate\Database\Eloquent\Model;
 
 class Event extends Model
 {
@@ -81,11 +78,7 @@ class Event extends Model
 
     protected static function hasLocale($event)
     {
-        return $event instanceof PageSaved
-            || $event instanceof TermSaved
-            || $event instanceof EntrySaved
-            || $event instanceof GlobalsSaved
-            || $event instanceof TaxonomySaved;
+        return $event instanceof ContentSaved || $event instanceof TaxonomySaved;
     }
 
     protected static function getEvent($event)
