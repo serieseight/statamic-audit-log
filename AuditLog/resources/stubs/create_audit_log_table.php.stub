@@ -14,7 +14,7 @@ class CreateAuditLogTable extends Migration
     {
         Schema::create('audit_log', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('user_id');
+            $table->string('user_id')->nullable();
             $table->string('data_id')->nullable();
             $table->string('locale')->nullable();
             $table->string('event')->nullable();
